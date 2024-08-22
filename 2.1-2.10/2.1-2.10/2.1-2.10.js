@@ -67,7 +67,7 @@ let d = b++; // 1
 console.log(c, "c", d, "d");
 
 "" + 1 + 0; // '10'
-"" - 1 + 0; // -1
+"" - 1 + 0; // '-1'
 true + false; // 1
 6 / "3"; // '2'
 "2" * "3"; // '6'
@@ -157,3 +157,98 @@ let message =
     : login == ""
     ? "Нет логина"
     : "";
+for (i = 2; i <= 100; i = i + 2) {
+  console.log(i);
+}
+
+let num = "6px";
+let num1 = "5.5px";
+console.log(parseInt(num) + parseFloat(num1) + "px");
+
+let str = "abcde";
+str[0];
+str[0];
+console.log(str[4] + str[3] + str[2] + str[1] + str[0]);
+
+let num2 = 4;
+num2 = num2 + "";
+console.log(num2[0]);
+
+let num = 1;
+num = num + 2;
+num = num + 3;
+
+alert(num);
+let num1 = 3;
+num1++;
+
+let num2 = num1--;
+
+alert(num1++);
+alert(--num2);
+
+let str1 = "1";
+let str2 = "2";
+let str3 = "3";
+let str4 = "4";
+let str5 = "5";
+
+document.write(str1 + "<br>");
+document.write(str2 + "<br>");
+document.write(str3 + "<br>");
+document.write(str4 + "<br>");
+document.write(str5 + "<br>");
+
+let a = 1;
+let b = 2;
+console.log(a + b + "c");
+
+let num = "123";
+let sum = Number(num[0]) + Number(num[1]) + Number(num[2]);
+console.log(sum);
+
+let a = 0;
+a++;
+console.log(a);
+
+let num = 123;
+num = String(num);
+console.log(num.length);
+
+let a = 24 * 60 * 60;
+console.log(a);
+
+let num = 123;
+let str = String(num);
+console.log(str[str.length - 1]);
+
+let a = "123";
+let b = "456";
+let s = Number(a) + String(b);
+
+console.log(s);
+let sum =
+  Number(s[0]) +
+  Number(s[1]) +
+  Number(s[2]) +
+  Number(s[3]) +
+  Number(s[4]) +
+  Number(s[5]);
+console.log(sum);
+
+let aaa = 1;
+let bbb = 2;
+let ccc = 3;
+
+console.log(aaa + bbb + ccc);
+
+let num1 = -1;
+if (num1 <= 0) {
+  alert("число отрицательное");
+} else {
+  alert("число положительное");
+}
+
+
+
+
