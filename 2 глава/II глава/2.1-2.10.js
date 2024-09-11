@@ -253,8 +253,3 @@
 //   i = i + 1;
 //   console.log(i);
 // }
-function combat(health, damage) {
-  return health < damage ? 0 : health - damage;
-}
-
-combat(100, 5);
