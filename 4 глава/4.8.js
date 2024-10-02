@@ -40,3 +40,21 @@ let obj = {
 
 console.log(String(obj)); // 2
 console.log(Number(obj)); // 1
+
+const user = {
+  name: "Иван",
+  age: 25,
+  [Symbol.toPrimitive](hint) {
+    if (hint === "string") {
+      return `Имя: ${this.name}`;
+    } else if (hint === "number") {
+      return this.age;
+    } else {
+      return `${this.name}, ${this.age}`;
+    }
+  },
+};
+
+console.log(String(user)); // "Имя: Иван"
+console.log(Number(user)); // 25
+console.log(user + "!"); // "Иван, 25!"

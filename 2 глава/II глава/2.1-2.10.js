@@ -253,3 +253,25 @@
 //   i = i + 1;
 //   console.log(i);
 // }
+
+// 1) Напишите функцию, которая принимает массив чисел, удаляет все дубликаты, сортирует массив по возрастанию и возвращает его.
+
+// let array = [5, 3, 8, 3, 1, 1, 4, 7];
+
+// function uniqueSort(arr) {
+//  let newArr = new Set(array);
+//   const arr1 = Array.from(newArr);
+//   arr1.sort();
+//   return arr1;
+// }
+
+//2) Напишите функцию, которая принимает массив и число k и перемещает последние k элементов массива в начало.
+
+let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let k = 3;
+
+function rearrangeArray(arr, k) {
+  let lastElements = arr.splice(-k);
+  return [...lastElements, ...arr];
+}
+console.log(rearrangeArray(array, k));

@@ -88,3 +88,103 @@ accumulator.read(); // прибавляет введённое пользова�
 accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
 
 alert(accumulator.value); // выведет сумму этих значений
+
+function Book(title, author, year) {
+  this.title = title;
+  this.author = author;
+  this.year = year;
+  this.getInfo = function () {
+    return `Название:${this.title}, Автор:${this.author} Год:${this.year}.`;
+  };
+}
+
+const book1 = new Book("1984", "Джордж Оруэлл", 1949);
+console.log(book1.getInfo()); // Ожидаемый вывод: "Название: 1984, Автор: Джордж Оруэлл, Год: 1949"
+
+const book2 = new Book("Мастер и Маргарита", "Михаил Булгаков", 1966);
+console.log(book2.getInfo());
+//
+
+function Student(name, age, grades = []) {
+  this.name = name;
+  this.age = age;
+  this.grades = grades;
+}
+
+(Student.prototype.addGrade = function (grade) {
+  this.grades.push(grade);
+}),
+  (Student.prototype.getAverageGrade = function () {
+    if (this.grades.length <= 0) {
+      return "нет оценок";
+    } else {
+      const total = this.grades.reduce((acc, grade) => acc + grade, 0);
+      return total / this.grades.length;
+    }
+  }),
+  (Student.prototype.isAdult = function () {
+    return this.age >= 18;
+  });
+
+const student1 = new Student("Иван", 20);
+student1.addGrade(5);
+student1.addGrade(4);
+student1.addGrade(3);
+console.log(student1.getAverageGrade()); // Ожидаемый вывод: 4
+console.log(student1.isAdult()); // Ожидаемый вывод: true
+
+const student2 = new Student("Мария", 17);
+console.log(student2.getAverageGrade()); // Ожидаемый вывод: "Нет оценок"
+console.log(student2.isAdult());
+
+// Создай простую корзину покупок. Корзина должна содержать три функции:
+// addItem(name, count) — функция для добавления товара в корзину.
+// Если товар уже есть в корзине, увеличиваем его количество.
+// Если товара нет, добавляем его с указанным количеством.
+// removeItem(name, count) — функция для удаления товара из корзины.
+
+// Если товара нет, ничего не делаем.
+// Если количество товара в корзине больше или равно указанному количеству, удаляем товар полностью. Если меньше, просто уменьшаем количество.
+// getCart() — функция для вывода содержимого корзины. Эта функция должна показывать все товары и их количество в корзине.
+
+// Пример использования:
+// Добавь 3 яблока и 2 банана в корзину.
+// Удали 1 яблоко.
+// Выведи содержимое корзины.
+// Удали все бананы.
+// Снова выведи содержимое корзины.
+// Корзина должна хранить товары как объекты с их количеством.
+// Простая логика для добавления и удаления товаров.
+
+Требования: function Basket() {
+  this.item = {};
+
+  (this.addItem = function (name, count) {
+    if (this.item[name]) {
+      this.item[name] += count;
+    } else {
+      this.item[name] = count;
+    }
+    console.log(this.item, "item");
+  }),
+    (this.removeItem = function (name, count) {
+      if (!this.item[name]) return;
+
+      if (this.item[name] <= count) {
+        delete this.item[name];
+      } else {
+        this.item[name] -= count;
+      }
+    }),
+    (this.getCart = function () {
+      return console.log("ваши покупки:", this.item);
+    });
+}
+
+const basket = new Basket();
+basket.addItem("яблоки", 3);
+basket.addItem("бананы", 2);
+basket.addItem("сыр", 1);
+basket.addItem("сыр", 1);
+basket.removeItem("бананы", 2);
+basket.getCart();
