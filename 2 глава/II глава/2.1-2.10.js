@@ -275,3 +275,9 @@ function rearrangeArray(arr, k) {
   return [...lastElements, ...arr];
 }
 console.log(rearrangeArray(array, k));
+
+//3) Напишите функцию, которая принимает массив чисел и возвращает объект с суммами четных и нечетных чисел.
+
+let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+function sumEvenOdd(arr) {}
