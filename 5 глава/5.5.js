@@ -8,7 +8,6 @@ let arr = [1, 2, 5];
 // удалить 0 элементов,
 // затем вставить числа 3 и 4
 arr.splice(-1, 0, 3, 4);
-
 alert(arr); // [1, 2, 3, 4, 5]
 
 //slice
@@ -123,3 +122,13 @@ function findMin(arr) {
 //Сортировать в порядке по убыванию
 let arr2 = [5, 2, 1, -10, 8];
 console.log(arr2.sort((a, b) => b - a));
+
+// You are given two sorted arrays that both only contain integers. Your task is to find a way to merge them into a single one, sorted in asc order. Complete the function mergeArrays(arr1, arr2), where arr1 and arr2 are the original sorted arrays.
+// You don't need to worry about validation, since arr1 and arr2 must be arrays with 0 or more Integers. If both arr1 and arr2 are empty, then just return an empty array.
+// Note: arr1 and arr2 may be sorted in different orders. Also arr1 and arr2 may have same integers. Remove duplicated in the returned result.
+function mergearrays(arr1, arr2) {
+  const result = [...arr1, ...arr2]
+    .filter((item, index) => [...arr1, ...arr2].indexOf(item) === index)
+    .sort((a, b) => a - b);
+  return result;
+}
