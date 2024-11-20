@@ -25,8 +25,15 @@ Order.prototype.addItem = function (item, count) {
   }
   console.log(item, "item");
   console.log(this.items, "items");
-  console.log(this.items[0].name, "cont");
+  console.log(this.items[0].name, "name");
+  console.log(this.items[0].count, "count");
 };
+Order.prototype.removeItem = function (item, count) {
+  if (this.items[0] && this.items[0].name === item.name) {
+    this.items.pop({ ...item, count });
+  }
+};
+Order.prototype.getCheck = function (item, price, count) {};
 
 const order = new Order();
 order.addItem({ name: "zopa", price: 100 }, 1);
