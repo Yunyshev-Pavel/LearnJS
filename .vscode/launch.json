@@ -4,6 +4,7 @@
     // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "node",
             "request": "launch",
@@ -11,7 +12,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/5 глава/5.10.js"
+            "program": "${workspaceFolder}/6 глава/6.4.js"
         }
     ]
 }
