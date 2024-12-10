@@ -37,7 +37,7 @@ console.log(sum(100));
 //Вам нужно создать рекурсивную функцию под названием replicate которая будет принимать аргументы times и number.
 //Функция должна возвращать массив, содержащий повторения аргумента number . Например, replicate(3, 5) должен возвращать [5,5,5]. Если аргумент times отрицательный, верните пустой массив.
 //Как бы заманчиво это ни звучало, не используйте циклы для решения этой задачи.
-function replicate(times, number) {
+function replicate(times, ...number) {
   if (times <= 0) {
     return [];
   }
@@ -72,3 +72,43 @@ function getValues(obj) {
 
 console.log(getValues(data));
 // ["John", 30, "USA", "New York"]
+
+function sumToAll(n) {
+  return n === 1 ? 1 : n + sumToAll(n - 1);
+}
+console.log(sumToAll(5));
+
+function xsum(n, acc = 0) {
+  return n === 1 ? 1 : n + xsum(n - 1, acc + n);
+}
+console.log(xsum(5));
+
+function pow(base, n) {
+  return n == 0 ? 1 : base * pow(base, n - 1);
+}
+console.log(pow(2, 3));
+
+function xpow(base, n, acc = 1) {
+  return n === 0 ? acc : xpow(base, n - 1, acc * base);
+}
+console.log(xpow(2, 3));
+
+// задача на попрошайку
+function randomInteger(min, max) {
+  let random = min - 0.5 + Math.random() * (max - min + 1);
+  return Math.round(random);
+}
+function createBeggar() {
+  let count = 0;
+  return function beggar() {
+    count += randomInteger(0, 100);
+    console.log(count);
+    if (count >= 250) return;
+    beggar();
+  };
+}
+const begg = createBeggar();
+const begg1 = createBeggar();
+
+begg();
+begg1();

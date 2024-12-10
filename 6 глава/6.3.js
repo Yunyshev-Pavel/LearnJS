@@ -99,3 +99,54 @@ const getOne = canGetCount(2);
 getOne(); //=== "yes";
 getOne(); //=== "yes";
 getOne(); //=== "no";
+
+function once(fn) {
+  let hasBeenCalled = false;
+  let cacheResult;
+  return function (...args) {
+    if (hasBeenCalled) return cacheResult;
+    hasBeenCalled = true;
+    cacheResult = fn(...args);
+    return cacheResult;
+  };
+}
+const addByTwoOnce = once((num) => num + 2);
+const addByFiveOnce = once((num) => num + 5);
+console.log(addByTwoOnce(2)); // 4
+console.log(addByTwoOnce(5)); // 4
+console.log(addByTwoOnce(7)); //4
+
+console.log(addByFiveOnce(5)); //10
+console.log(addByFiveOnce(6)); //10
+
+let counter1 = 0;
+
+function test() {
+  console.log(++counter1);
+}
+console.log(test()); //1
+
+function test2(cb) {
+  let counter1 = 5;
+  cb();
+}
+console.log(test2(test)); //2
+
+function createIncrement() {
+  let count = 0;
+  function increment() {
+    count++;
+  }
+  let message = `count - ${count}`;
+  function log() {
+    console.log(message);
+  }
+
+  return [increment, log];
+}
+
+const [increment, log] = createIncrement();
+console.log(increment());
+console.log(increment());
+console.log(increment());
+console.log(log());
