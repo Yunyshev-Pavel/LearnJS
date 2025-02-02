@@ -1,4 +1,21 @@
 // Декораторы/call/apply
+// Долг - Реализовать debounce без setTimeout
+
+function debounce(func, ms) {
+  let time = 0;
+  return function () {
+    const now = Date.now();
+    if (now - time >= ms) {
+      time = now;
+      func.apply(this, arguments);
+    }
+  };
+}
+const dec = debounce((msg) => console.log(msg), 1000);
+
+console.log(dec("zopa"));
+
+//////////////////////////////////////////
 
 function logDecorator(func) {
   return function (...args) {

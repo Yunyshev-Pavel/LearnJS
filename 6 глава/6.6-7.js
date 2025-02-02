@@ -26,7 +26,7 @@ console.log(save.name);
 function sayHI(a, b) {
   return console.log("hello");
 }
-function MyFuct(sayHI) {
+function MyFunc(sayHI) {
   return sayHI.length;
 }
 
