@@ -13,29 +13,65 @@
 // Ценой за штуку. Два итема с одинаковым именем считаем одной позицией в чеке.
 // Использовать отладку (debugger) при решении в хроме. Если получится без отладки - самому допустить ошибку и найти ее при отладке через интерфейс девтулзо
 
-function Order() {
-  this.items = [];
+function Basket() {
+  this.items = {};
+  this.isLockOrder = false;
 }
-Order.prototype.addItem = function (item, count) {
-  //   this.items[item] = count;
-  if (this.items[0] && this.items[0].name === item.name) {
-    this.items[0].count += 1;
-  } else {
-    this.items.push({ ...item, count });
-  }
-  console.log(item, "item");
-  console.log(this.items, "items");
-  console.log(this.items[0].name, "name");
-  console.log(this.items[0].count, "count");
-};
-Order.prototype.removeItem = function (item, count) {
-  if (this.items[0] && this.items[0].name === item.name) {
-    this.items.pop({ ...item, count });
-  }
-};
-Order.prototype.getCheck = function (item, price, count) {};
+Basket.prototype.addItem = function (item, count) {
+  if (this.isLockOrder)
+    return alert("Товары нельзя добавлять, заказ заблокирован");
 
-const order = new Order();
-order.addItem({ name: "zopa", price: 100 }, 1);
-order.addItem({ name: "zopa", price: 100 }, 1);
-order.addItem({ name: "chipsiki", price: 100 }, 1);
+  if (!this.items[item.name]) {
+    this.items[item.name] = { price: item.price, count };
+  } else {
+    this.items[item.name].count++;
+  }
+};
+Basket.prototype.removeItem = function (item, count) {
+  if (this.isLockOrder)
+    return alert("Товары нельзя удалять, заказ заблокирован");
+  if (!this.items[item.name]) return console.log("Такого товара нету");
+  if (this.items[item.name].count <= count || count === undefined) {
+    delete this.items[item.name];
+  } else {
+    this.items[item.name].count--;
+  }
+};
+Basket.prototype.getCheck = function () {
+  Object.values(this.items).reduce(
+    (sum, item) => sum + item.price * item.count,
+    0
+  );
+};
+
+Basket.prototype.lockOrder = function () {
+  this.isLockOrder = true;
+};
+Basket.prototype.unlockOrder = function () {
+  this.isLockOrder = false;
+};
+
+const basket = new Basket();
+
+function addToBasket(name, price) {
+  basket.addItem(name, price);
+}
+
+function removeFromBasket(name) {
+  basket.removeItem(name);
+}
+function lockOrder() {
+  basket.lockOrder();
+  alert("Заказ заблокирован!");
+}
+function unlockOrder() {
+  basket.unlockOrder();
+  alert("Заказ заблокирован!");
+}
+
+basket.addItem({ name: "zopa", price: 100 }, 1);
+basket.addItem({ name: "zopa", price: 100 }, 1);
+basket.addItem({ name: "chipsiki", price: 100 }, 1);
+basket.removeItem({ name: "zopa", price: 100 }, 1);
+basket.getCheck();
+console.log(basket);

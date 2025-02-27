@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>конструктор</title>
+    <style>
+         body { font-family: Arial, sans-serif; }
+        .product { margin-bottom: 10px; }
+        .basket { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+        .locked { color: red; font-weight: bold; }
+    </style>
 </head>
 <body>
+<h1>магазин</h1>
+<div class="product">
+    <span>Пиво - 100р</span>
+    <button onclick="addToBasket('Пиво',100)">+</button>
+    
+</div>
+
+<div class="product">
+    <span>Чипсики - 100р</span>
+    <button onclick="addToBasket('Чипсики',100)">+</button>
+
+
+</div>
+<div class="basket">
+    <h1>корзина</h1>
+    <ul id="basketList"></ul>
+    <p><strong>Общая сумма: <span id="totalPrice">0</span></strong></p>
+    <button onclick="lockOrder()">Заблокировать</button>
+    <button onclick="unlockOrder()">Разблокировать</button>
+
+</div>
+
+
+
     <script src="index.js"></script>
 </body>
 </html>
