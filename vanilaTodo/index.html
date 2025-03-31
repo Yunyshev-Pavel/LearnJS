@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+ /* Общие стили */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #74ebd5, #acb6e5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Контейнер списка */
+.todo-container {
+  width: 350px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Поле ввода */
+.input-field {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* Общие стили кнопок */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+/* Иконки внутри кнопок */
+button i {
+  font-size: 16px;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+/* Кнопка добавления */
+.addBtn {
+  width: 50px;
+  height: 40px;
+  font-size: 18px;
+}
+
+/* Список задач */
+ul {
+  list-style: none;
+  padding: 0;
+}
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  margin: 0;
+}
+.task {
+  display: flex;
+  align-items: center;
+  background: #f8f8f8;
+  padding: 12px;
+  margin: 5px 0;
+  border-radius: 8px;
+  transition: background 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Контейнер для чекбокса и текста */
+.task-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+  min-width: 0; /* Позволяет тексту сжиматься при необходимости */
+}
+
+.task-info span {
+  flex-grow: 5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  text-align: left;
+}
+
+.task:hover {
+  background: #e3e3e3;
+}
+
+/* Чекбокс */
+.task input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-right: 5px;
+}
+
+/* Кнопки выполнения и удаления */
+.task button {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #696969;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.delete {
+  background: #423a39;
+}
+
+.delete:hover {
+  background: #c0392b;
+}
+
+/* Зачеркнутый текст у выполненной задачи */
+.done .task-info {
+  text-decoration: line-through;
+  color: #888;
+}
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <h1>To-Do List</h1>
+
+      <form class="input-field">
+        <input type="text" id="taskInput" placeholder="Новая задача...">
+        <button class="addBtn" type="submit"> 
+          <i class="fas fa-plus"  ></i>
+        </button>
+      </form>
+ 
+      <ul class="task-list">
+        <li class="task">
+          <div class="task-info">
+            <input type="checkbox">
+            <span>task</span>
+          </div>
+
+            <button class="delete">
+              <i class="fas fa-trash"></i>
+            </button>
+        </li>
+        
+      </ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+

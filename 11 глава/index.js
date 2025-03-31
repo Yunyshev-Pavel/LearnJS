@@ -174,13 +174,13 @@ function rejectPromise(arr) {
   });
 }
 
-const promises = [
+const promises1 = [
   Promise.resolve(1),
   Promise.reject("Ошибка 1"),
   Promise.resolve(2),
   Promise.reject("Ошибка 2"),
 ];
 
-rejectPromise(promises).then((rejectedPromises) => {
+rejectPromise(promises1).then((rejectedPromises) => {
   console.log(rejectedPromises); // Ожидаемый результат: массив с отклонёнными промисами
 });
