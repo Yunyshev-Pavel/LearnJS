@@ -12,7 +12,7 @@ stepPromise(1)
   .then(() => stepPromise(2))
   .then(() => stepPromise(3))
   .then(() => console.log("Все шаги выполнены!"));
-
+// пример на понимания
 Promise.resolve(1)
   .then((res) => {
     console.log(res); // 1
@@ -44,6 +44,39 @@ Promise.resolve(1)
     console.log("finally2"); //finally2
   });
 
+// пример на понимания
+const promise = new Promise((resolve, reject) => {
+  console.log(1);
+  setTimeout(() => {
+    console.log("timerStart");
+    resolve("success");
+    console.log("timerEnd");
+  }, 0);
+  console.log(2);
+});
+promise.then((res) => {
+  console.log(res);
+});
+console.log(4);
+
+// пример на понимания
+console.log("start");
+
+const promise1 = Promise.resolve().then(() => {
+  console.log("promise1");
+  const timer2 = setTimeout(() => {
+    console.log("timer2");
+  }, 0);
+});
+
+const timer1 = setTimeout(() => {
+  console.log("timer1");
+  const promise2 = Promise.resolve().then(() => {
+    console.log("promise2");
+  });
+}, 0);
+
+console.log("end");
 //  1.Напишите функцию createPromise, которая возвращает промис, разрешающийся через 2 секунды с сообщением "Промис выполнен".
 // Обработка успешного результата
 // Используйте созданный в предыдущем пункте промис и обработайте его результат с помощью .then, выводя сообщение в консоль
