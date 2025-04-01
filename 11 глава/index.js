@@ -184,3 +184,160 @@ const promises1 = [
 rejectPromise(promises1).then((rejectedPromises) => {
   console.log(rejectedPromises); // Ожидаемый результат: массив с отклонёнными промисами
 });
+
+// Напиши промис с обработкой ошибки, где вероятность возникновения ошибки 50%.
+// Доработай предыдущий промис так, чтобы в finally всегда выполнялось console.log("Завершено").
+function randomPromise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      Math.random() > 0.5 ? resolve("Успех!") : reject(new Error("Ошибка!"));
+    }, 1000);
+  });
+}
+randomPromise()
+  .then(console.log)
+  .catch(console.error)
+  .finally(console.log("Завершено"));
+
+//   1️⃣ Напиши цепочку промисов, которая:
+// Через 1 секунду возвращает число 10.
+// Умножает его на 2.
+// Возводит в квадрат.
+// Выводит результат.
+function chainingPromise() {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res();
+    }, 1000);
+  });
+}
+chainingPromise()
+  .then(() => {
+    console.log(10, "ZOPA");
+    return 10;
+  })
+  .then((res) => {
+    return res * 2;
+  })
+  .then((res) => {
+    return res ** 2;
+  })
+  .then((res) => {
+    console.log(res, "ZOPA");
+  });
+
+Promise.resolve(10)
+  .then((n) => n * 2)
+  .then((n) => n ** 2)
+  .then(console.log);
+// 2️⃣ Напиши промис, который эмулирует запрос к серверу:
+// Если Math.random() > 0.5, через 1 секунду он успешно возвращает { data: "OK" }.
+// Иначе через 1 секунду выбрасывает ошибку "Сервер недоступен".
+// Обработай возможную ошибку.
+function requestToServerPromise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      Math.random() > 0.5
+        ? resolve({ data: "OK" })
+        : reject(new Error("Сервер недоступен!"));
+    }, 1000);
+  });
+}
+requestToServerPromise().then(console.log).catch(console.error);
+
+// 3️⃣ Напиши функцию loadJson(url), которая делает fetch(url) и парсит JSON, но возвращает ошибку "Некорректный JSON", если сервер вернул невалидные данные.
+function loadJson(url) {
+  return fetch(url).then((response) =>
+    response.json().catch(() => Promise.reject(new Error("Некорректный JSON")))
+  );
+}
+loadJson("https://jsonplaceholder.typicode.com/todos/1")
+  .then(console.log)
+  .catch(console.error);
+
+// 4️⃣ Напиши промис, который загружает данные, но всегда показывает "Загрузка завершена" в finally().
+new Promise((res) => setTimeout(() => res("Данные загружаются"), 1000))
+  .then(console.log)
+  .catch(console.error)
+  .finally(() => console.log("Загрузка завершена"));
+
+// 5️⃣ Напиши цепочку промисов, где ошибка в середине не прерывает выполнение кода, а просто логируется и продолжается выполнение цепочки.
+Promise.resolve()
+  .then(() => {
+    throw new Error("Ошибка");
+  })
+  .catch((err) => {
+    console.error("Поймали ошибку:", err.message);
+    return "Всё нормально";
+  })
+  .then(console.log);
+
+// 1️⃣ Допиши код, чтобы он обработал ошибку и продолжил выполнение цепочки:
+Promise.resolve(1)
+  .then((num) => {
+    throw new Error("Ошибка!");
+  })
+  .then((num) => console.log("Не выполнится"))
+  .catch((err) => {
+    console.log("Поймали ошибку:", err.message);
+    return "zopa";
+  })
+  .then((res) => console.log("Продолжаем выполнение", res));
+
+//   2️⃣ Напиши функцию fetchData(url), которая делает fetch(url), но:
+// Если ошибка сети — выбрасывает "Ошибка сети"
+// Если сервер вернул не 200, выбрасывает "Ошибка HTTP: <код>"
+// Если JSON некорректный, выбрасывает "Некорректный JSON"
+function fetchData(url) {
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Ошибка HTTP: ${response.status}`);
+      }
+      return response.json();
+    })
+    .catch((err) => {
+      if (err instanceof TypeError) {
+        throw new Error("Ошибка сети");
+      }
+      if (err instanceof SyntaxError) {
+        throw new Error("Некорректный JSON");
+      }
+      throw err;
+    });
+}
+
+fetchData("https://jsonplaceholder.typicode.com/posts/1")
+  .then((data) => console.log("Данные:", data))
+  .catch((err) => console.error("Ошибка:", err.message));
+
+// 3️⃣ Допиши код, чтобы ошибка в finally() не мешала выполнению цепочки:
+Promise.resolve("Начало")
+  .finally(() => {
+    try {
+      throw new Error("Ошибка в finally");
+    } catch (e) {
+      console.log("перехват", e.message);
+    }
+  })
+  .then(console.log)
+  .catch(console.error);
+// 4️⃣ Напиши функцию-обёртку safeAsync(fn), которая принимает функцию fn и оборачивает её в try/catch, возвращая успешный промис даже в случае ошибки.
+
+function safeAsync(fn) {
+  return function (...args) {
+    return Promise.resolve(fn(...args)).catch((err) => {
+      console.error("Произошла ошибка:", err.message);
+      return null;
+    });
+  };
+}
+
+// Пример использования:
+async function fetchData() {
+  throw new Error("Ошибка загрузки");
+}
+
+const safeFetch = safeAsync(fetchData);
+
+safeFetch().then((result) => console.log("Результат:", result));
