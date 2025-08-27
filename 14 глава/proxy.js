@@ -1,8 +1,7 @@
-const { log } = require("console");
-const { get } = require("http");
+const { it } = require("node:test");
 
 //Задача 1: Логгер доступа
-const user = {
+const user3 = {
   name: "Аня",
   age: 25,
 };
@@ -88,7 +87,7 @@ const proxy = new Proxy(User, {
   },
 });
 
-const user = new proxy("Вася");
+const user2 = new proxy("Вася");
 console.log(user.name);
 
 // Задача 6: Защита от удаления (deleteProperty)
@@ -111,6 +110,16 @@ delete proxy.theme; //
 console.log(config.theme); // undefined
 delete proxy._secret; //  Нельзя удалить приватное свойст
 
+// можно установить id в качестве индекса массива и получить объект по id при этом не проходить по всему массиву
+const indexedArray = new Proxy(Array, {
+  construct(target, [args]) {
+    const index = {};
+    args.forEach((item) => (index[item.id] = item));
+
+    return new Proxy(new target(...args));
+  },
+});
+
 // Observable
 // Создайте функцию makeObservable(target), которая делает объект «наблюдаемым», возвращая прокси.
 
@@ -130,7 +139,7 @@ function makeObservable(target) {
   return proxy;
 }
 
-let user = {};
+let user1 = {};
 user = makeObservable(user);
 
 user.observe((key, value) => {
