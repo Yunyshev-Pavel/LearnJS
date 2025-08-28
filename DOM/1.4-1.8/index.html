@@ -32,7 +32,7 @@
       <li class="item">Второй</li>
       <li class="item">Третий</li>
     </ul>
-    <button id="searchBtn">Сделать красными</button>
+    <button id="searchBtn" disabled>Сделать красными</button>
 
     <h2>Свойства узлов</h2>
     <ul id="nodeList">
@@ -42,19 +42,14 @@
     </ul>
 
     <h2>Атрибуты и свойства</h2>
-    <form id="myForm">
+    <form id="myForm" data-info="hello">
       <input type="text" id="name" placeholder="Ваше имя" />
       <input type="checkbox" id="agree" checked data-info="initial" /> Согласен
       <button type="submit">Отправить</button>
     </form>
 
-    <h2>Модификация документа</h2>
-    <ul id="modifyList"></ul>
-    <button id="addItems">Добавить элементы</button>
-
     <h2>Стили и классы</h2>
     <div class="box" id="box"></div>
     <input type="text" id="colorInput" placeholder="Введите цвет" />
-    <button id="toggleClassBtn">Toggle Highlight</button>
   </body>
 </html>

@@ -44,42 +44,86 @@ console.log(checkbox.checked);
 // Нестандартные атрибуты:
 // Добавь data-info="hello" к любому элементу
 // Выведи его через dataset.info.
+const form = document.getElementById("myForm");
+console.log(form.dataset.info);
+form.dataset.info = "helo world";
+console.log(form.dataset.info);
 
 // Изменение атрибутов динамически:
 // Для формы с <input> меняй placeholder каждые 2 секунды через JS.
+const inputDynamic = document.querySelector("input");
+console.log(inputDynamic);
+const interval = setInterval(() => {
+  const sec = new Date().getSeconds();
+  inputDynamic.placeholder = `Меняю placeholder ${sec}`;
+}, 2000);
+setTimeout(() => clearInterval(interval), 10000);
 
 // Удаление атрибутов:
 // Удали disabled у кнопки через removeAttribute.
-
-// Проверка существования атрибута:
-// Для всех <img> проверь, есть ли у них alt, если нет — выведи предупреждение в консоль.
+const btnRemoveAttr = document.getElementById("searchBtn");
+btnRemoveAttr.removeAttribute("disabled");
 
 // Создание элементов и добавление:
 // Создай список <ul> и добавь 5 <li> с текстом «Элемент X», где X — номер элемента.
+const newUl = document.createElement("ul");
+
+for (let i = 1; i <= 5; i++) {
+  const newLi = document.createElement("li");
+  newLi.textContent = `«Элемент ${i}`;
+  newUl.append(newLi);
+}
+document.body.append(newUl);
 
 // Удаление элементов по условию:
 // Удали все <li>, текст которых содержит слово «Удалить».
+const liList = document.querySelectorAll("li");
+liList.forEach((li) => {
+  if (li.textContent.includes("Удалить")) {
+    li.remove();
+  }
+});
 
 // Клонирование элементов:
-// Клонируй любой <div> и вставь копию после оригинала.
+// Клонируй любой <li> и вставь копию после оригинала.
+const ul = document.getElementById("searchList");
+const templateItem = item[0];
 
+for (let i = 1; i <= 3; i++) {
+  const cloneItem = templateItem.cloneNode(true);
+  cloneItem.textContent = `Item ${i}`;
+  ul.append(cloneItem);
+}
 // Изменение через innerHTML:
 // Создай контейнер <div> и добавь внутрь таблицу через innerHTML с 3 строками и 2 столбцами.
+container.innerHTML = `
+  <table border="1">
+    <tr><td>1</td><td>2</td></tr>
+    <tr><td>3</td><td>4</td></tr>
+    <tr><td>5</td><td>6</td></tr>
+  </table>
+`;
+document.body.append(container);
 
-// Обработчики на динамически созданные элементы:
-// Создай кнопку для каждого <li> — при клике на кнопку выводи текст этого элемента.
+// /Создай кнопку для каждого <li>.
+// При клике на кнопку у соответствующего элемента меняется цвет текста (например, с чёрного на красный, и обратно при повторном клике).
+const btn = document.getElementById("searchBtn");
+const items = document.querySelectorAll(".item");
+btn.addEventListener("click", () => {
+  items.forEach((li) => {
+    if (li.style.color === "red") {
+      li.style.color = "black";
+      return;
+    }
+    li.style.color = "red";
+  });
+});
 
 // Динамическое изменение стиля:
 // При вводе цвета в <input> меняй фон <div class="box"> на этот цвет.
+const input = document.getElementById("colorInput");
+const box = document.querySelector(".box");
 
-// Добавление и удаление классов:
-// Клик на кнопку добавляет класс .highlight, клик снова — удаляет.
-
-// Смена нескольких стилей через JS:
-// Для элемента изменяй одновременно цвет текста, фон и размер шрифта через style.
-
-// Получение computedStyle:
-// Выведи в консоль текущий цвет, фон и размер шрифта любого элемента через getComputedStyle.
-
-// Эффект «hover» через JS:
-// При наведении на элемент меняй его цвет и размер, при уходе возвращай обратно.
+input.addEventListener("input", () => {
+  box.style.background = input.value;
+});
